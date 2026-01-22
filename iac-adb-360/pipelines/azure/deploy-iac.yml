@@ -14,58 +14,69 @@ pr:
       - dev
 
 variables:
-  - ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/dev') }}: 
-    - template: ./configdev.yml
-  - ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/main') }}: 
-    - template: ./configprd.yml
-
+- ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/dev') }}:
+  - template: ./configdev.yml
+- ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/main') }}:
+  - template: ./configprd.yml
 
 pool:
   vmImage: ubuntu-latest
 
-
-
 stages:
-  - stage: checkbicep
-    displayName: check bicep
-    jobs:
-      - job: checkbicepjob
-        displayName: check bicep syntax
-        steps:
-          - script: |
-              echo "Checking bicep syntax..."
-              bicep build ./iac-adb-360/main.bicep
-            displayName: checking bicep syntax ...
+- stage: checkbicep
+  displayName: check bicep
+  jobs:
+  - job: checkbicepjob
+    displayName: check bicep syntax
+    steps:
+    - script: |
+        echo "Checking bicep syntax..."
+        bicep build ./iac-adb-360/main.bicep
+      displayName: checking bicep syntax ...
 
-  - stage: validatebicep
-    displayName: Validate Bicep against Azure
-    jobs:
-      - job: ValidateBicepJob
-        displayName: Validate Bicep Job
-        steps:
-        - task: AzureCLI@2
-          inputs:
-            azureSubscription: 'ado-sc'
-            scriptType: 'bash'
-            scriptLocation: 'inlineScript'
-            inlineScript: 'az deployment group validate --resource-group $(resourcegroup) --template-file ./iac-adb-360/main.bicep --parameters baseName=$(baseName) env=$(env)'
+- stage: validatebicep
+  displayName: Validate Bicep against Azure
+  jobs:
+  - job: ValidateBicepJob
+    displayName: Validate Bicep Job
+    steps:
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'ado-sc'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          echo "BUILD_SOURCEVERSION=$BUILD_SOURCEVERSION"
+          echo "BUILD_SOURCEBRANCH=$BUILD_SOURCEBRANCH"
+          git --no-pager show -s --oneline HEAD
 
+          az deployment group validate \
+            --resource-group $(resourcegroup) \
+            --template-file ./iac-adb-360/main.bicep \
+            --parameters baseName=$(baseName) env=$(env)
 
-  - stage: Deploy
-    displayName: Deploy Stage
-    jobs:
-      - deployment: DeployJob
-        displayName: Deploy to dev environment
-        environment: dev
-        strategy:
-          runOnce:
-            deploy:
-              steps:
-                - checkout: self
-                - task: AzureCLI@2
-                  inputs:
-                    azureSubscription: 'ado-sc'
-                    scriptType: 'bash'
-                    scriptLocation: 'inlineScript'
-                    inlineScript: 'az deployment group create --resource-group $(resourcegroup) --template-file ./iac-adb-360/main.bicep --parameters baseName=$(baseName) env=$(env)'
-    
+- stage: Deploy
+  displayName: Deploy Stage
+  jobs:
+  - deployment: DeployJob
+    displayName: Deploy to dev environment
+    environment: dev
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - checkout: self
+          - task: AzureCLI@2
+            inputs:
+              azureSubscription: 'ado-sc'
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                echo "BUILD_SOURCEVERSION=$BUILD_SOURCEVERSION"
+                echo "BUILD_SOURCEBRANCH=$BUILD_SOURCEBRANCH"
+                git --no-pager show -s --oneline HEAD
+
+                az deployment group create \
+                  --resource-group $(resourcegroup) \
+                  --template-file ./iac-adb-360/main.bicep \
+                  --parameters baseName=$(baseName) env=$(env)
