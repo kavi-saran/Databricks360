@@ -3,8 +3,7 @@ name: PostMetastoreDeploy
 trigger:
   branches:
     include:
-      - devy
-
+      - dev
   paths:
     include:
       - '*'
