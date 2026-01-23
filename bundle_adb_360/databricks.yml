@@ -28,7 +28,7 @@ variables:
     default: dlg2devcentralusadb32hts
   catalogname:
     description: the catalog to use
-    default: catadb360dev
+    default: adbws_centralusadb3600121dev
   schemaname:
     description: the schema to use
     default: schemaadb360dev
