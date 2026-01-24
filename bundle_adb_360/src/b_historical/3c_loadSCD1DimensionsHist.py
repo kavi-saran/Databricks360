@@ -11,7 +11,7 @@
 # MAGIC for the last successfully ingested commits. Also it's calculating a surrogate key
 # MAGIC
 # MAGIC Parameters:
-# MAGIC * catalog (default catadb360dev)
+# MAGIC * catalog (default adbws_centralusadb3600121dev)
 # MAGIC * sourcedbname (default silverdb)
 # MAGIC * destdbname(default golddb)
 # MAGIC * tablename (default menuesconsumed)
@@ -20,7 +20,7 @@
 
 # COMMAND ----------
 
-dbutils.widgets.text('catalog', 'catadb360dev')
+dbutils.widgets.text('catalog', 'adbws_centralusadb3600121dev')
 dbutils.widgets.text('sourcedbname', 'silverdb')
 dbutils.widgets.text('destdbname', 'golddb')
 dbutils.widgets.text('tablename', 'addresses')

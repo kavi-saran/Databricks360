@@ -5,7 +5,7 @@
 # MAGIC This notebook loads the incremental data for customers and restaurants to silver
 # MAGIC
 # MAGIC Parameters:
-# MAGIC * catalog (default catadb360dev)
+# MAGIC * catalog (default adbws_centralusadb3600121dev)
 # MAGIC * schema (default schemadb360dev)
 # MAGIC * volume (default bronz)
 # MAGIC * destdb (default silver)
@@ -13,7 +13,7 @@
 
 # COMMAND ----------
 
-dbutils.widgets.text('catalog', 'catadb360dev')
+dbutils.widgets.text('catalog', 'adbws_centralusadb3600121dev')
 dbutils.widgets.text('schema', 'schemaadb360dev')
 dbutils.widgets.text('volume', 'bronze')
 dbutils.widgets.text('destdb', 'silverdb')

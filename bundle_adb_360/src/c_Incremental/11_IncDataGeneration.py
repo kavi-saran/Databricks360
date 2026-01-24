@@ -8,13 +8,13 @@
 # MAGIC It creates a quarter of the rows in customer or restaurants for the upsert sets
 # MAGIC
 # MAGIC Parameters:
-# MAGIC * catalog (default catadb360dev)
+# MAGIC * catalog (default adbws_centralusadb3600121dev)
 # MAGIC * schema (default schemaadb360dev)
 # MAGIC * volume (default bronze)
 
 # COMMAND ----------
 
-dbutils.widgets.text('catalog', 'catadb360dev')
+dbutils.widgets.text('catalog', 'adbws_centralusadb3600121dev')
 dbutils.widgets.text('schema', 'schemaadb360dev')
 dbutils.widgets.text('volume', 'bronze')
 

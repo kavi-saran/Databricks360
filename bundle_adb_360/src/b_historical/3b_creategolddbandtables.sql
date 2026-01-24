@@ -18,7 +18,7 @@
 -- COMMAND ----------
 
 -- MAGIC %python
--- MAGIC dbutils.widgets.text('catalog', 'catadb360dev')
+-- MAGIC dbutils.widgets.text('catalog', 'adbws_centralusadb3600121dev')
 -- MAGIC dbutils.widgets.text('dbname', 'golddb')
 
 -- COMMAND ----------

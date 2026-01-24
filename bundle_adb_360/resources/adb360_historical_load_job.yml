@@ -19,7 +19,7 @@ resources:
           notebook_task:
             notebook_path: ../src/b_historical/0_deleteAllHistorical.py
             base_parameters:
-              catalog: catadb360dev
+              catalog: adbws_centralusadb3600121dev
               schema: schemaadb360dev
               volume: bronze
         - task_key: createhistbronzeparquets
@@ -30,7 +30,7 @@ resources:
           notebook_task:
             notebook_path: ../src/b_historical/1_createhistbronzeparquets.py
             base_parameters:
-              catalog: catadb360dev
+              catalog: adbws_centralusadb3600121dev
               schema: schemaadb360dev
               volume: bronze
         - task_key: deleteallsilver
@@ -42,7 +42,7 @@ resources:
           notebook_task:
             notebook_path: ../src/b_historical/2a_deletallsilver.sql
             base_parameters:
-              catalog: catadb360dev
+              catalog: adbws_centralusadb3600121dev
               dbname: silverdb
         - task_key: createsilverdbandtables
           depends_on:
@@ -54,7 +54,7 @@ resources:
           notebook_task:
             notebook_path: ../src/b_historical/2b_createsilverdbandtables.sql
             base_parameters:
-              catalog: catadb360dev
+              catalog: adbws_centralusadb3600121dev
               dbname: silverdb
         - task_key: movetosilverhist
           depends_on:
@@ -65,7 +65,7 @@ resources:
           notebook_task:
             notebook_path: ../src/b_historical/2c_moveToSilverHist.py
             base_parameters:
-              catalog: catadb360dev
+              catalog: adbws_centralusadb3600121dev
               sourceschema: schemaadb360dev
               destschema: silverdb
               volume: bronze
@@ -79,7 +79,7 @@ resources:
           notebook_task:
             notebook_path: ../src/b_historical/3a_deletallgold.sql
             base_parameters:
-              catalog: catadb360dev
+              catalog: adbws_centralusadb3600121dev
               dbname: golddb
         - task_key: creategolddbandtables
           depends_on:
@@ -89,7 +89,7 @@ resources:
           notebook_task:
             notebook_path: ../src/b_historical/3b_creategolddbandtables.sql
             base_parameters:
-              catalog: catadb360dev
+              catalog: adbws_centralusadb3600121dev
               dbname: golddb
         - task_key: loadscd1dimensionshista
           depends_on:
@@ -101,7 +101,7 @@ resources:
           notebook_task:
             notebook_path: ../src/b_historical/3c_loadSCD1DimensionsHist.py
             base_parameters:
-              catalog: catadb360dev
+              catalog: adbws_centralusadb3600121dev
               sourcedbname: silverdb
               destdbname: golddb
               tablename: addresses
@@ -115,7 +115,7 @@ resources:
           notebook_task:
             notebook_path: ../src/b_historical/3c_loadSCD1DimensionsHist.py
             base_parameters:
-              catalog: catadb360dev
+              catalog: adbws_centralusadb3600121dev
               sourcedbname: silverdb
               destdbname: golddb
               tablename: restaurants
@@ -129,7 +129,7 @@ resources:
           notebook_task:
             notebook_path: ../src/b_historical/3c_loadSCD1DimensionsHist.py
             base_parameters:
-              catalog: catadb360dev
+              catalog: adbws_centralusadb3600121dev
               sourcedbname: silverdb
               destdbname: golddb
               tablename: menuesconsumed
@@ -143,7 +143,7 @@ resources:
           notebook_task:
             notebook_path: ../src/b_historical/3d_loadSCD2DimensionsHist.py
             base_parameters:
-              catalog: catadb360dev
+              catalog: adbws_centralusadb3600121dev
               sourcedbname: silverdb
               destdbname: golddb
               tablename: customers
@@ -159,7 +159,7 @@ resources:
           notebook_task:
             notebook_path: ../src/b_historical/3e_loadFactsHist.py
             base_parameters:
-              catalog: catadb360dev
+              catalog: adbws_centralusadb3600121dev
               sourcedbname: silverdb
               destdbname: golddb
 

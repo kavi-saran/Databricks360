@@ -13,13 +13,13 @@
 # MAGIC
 # MAGIC
 # MAGIC three parameters are needed:
-# MAGIC * catalog (default catadb360dev)
+# MAGIC * catalog (default adbws_centralusadb3600121dev)
 # MAGIC * schema (default schemaadb360dev)
 # MAGIC * volume (default bronze)
 
 # COMMAND ----------
 
-dbutils.widgets.text('catalog', 'catadb360dev')
+dbutils.widgets.text('catalog', 'adbws_centralusadb3600121dev')
 dbutils.widgets.text('schema', 'schemaadb360dev')
 dbutils.widgets.text('volume', 'bronze')
 
@@ -37,7 +37,7 @@ volume = dbutils.widgets.get('volume')
 
 # COMMAND ----------
 
-#%fs ls /Volumes/catadb360dev/adb360devdb/bronze/historical/
+#%fs ls /Volumes/adbws_centralusadb3600121dev/adb360devdb/bronze/historical/
 
 
 # COMMAND ----------
@@ -182,4 +182,4 @@ print('finished')
 
 # COMMAND ----------
 
-# MAGIC %fs ls /Volumes/catadb360dev/schemaadb360dev/bronze/historical
+# MAGIC %fs ls /Volumes/adbws_centralusadb3600121dev/schemaadb360dev/bronze/historical

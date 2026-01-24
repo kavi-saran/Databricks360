@@ -19,7 +19,7 @@ resources:
           notebook_task:
             notebook_path: ../src/c_Incremental/10_IncDataDeleteOnBronze.py
             base_parameters:
-              catalog: catadb360dev
+              catalog: adbws_centralusadb3600121dev
               schema: schemaadb360dev
               volume: bronze
         - task_key: inc_data_generation

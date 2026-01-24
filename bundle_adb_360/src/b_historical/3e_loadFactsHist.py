@@ -6,13 +6,13 @@
 # MAGIC This notebook loads the fact table, therefore, the loads of all the dimensions have to be completed.
 # MAGIC
 # MAGIC Parameters:
-# MAGIC * catalog (default catadb360dev)
+# MAGIC * catalog (default adbws_centralusadb3600121dev)
 # MAGIC * sourcedbname (default silverdb)
 # MAGIC * destdbname (default golddb)
 
 # COMMAND ----------
 
-dbutils.widgets.text('catalog', 'catadb360dev')
+dbutils.widgets.text('catalog', 'adbws_centralusadb3600121dev')
 dbutils.widgets.text('sourcedbname', 'silverdb')
 dbutils.widgets.text('destdbname', 'golddb')
 

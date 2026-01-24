@@ -3,13 +3,13 @@
 # MAGIC ### Delete all from historical bronze
 # MAGIC ---
 # MAGIC This notebook deletes all the data from the bronze volume and needs three parameters:
-# MAGIC * the catalog (default catadb360dev)
+# MAGIC * the catalog (default adbws_centralusadb3600121dev)
 # MAGIC * the schema (default schemaadb360dev)
 # MAGIC * the volume name (default bronze)
 
 # COMMAND ----------
 
-dbutils.widgets.text('catalog', 'catadb360dev')
+dbutils.widgets.text('catalog', 'adbws_centralusadb3600121dev')
 dbutils.widgets.text('schema', 'schemaadb360dev')
 dbutils.widgets.text('volume', 'bronze')
 

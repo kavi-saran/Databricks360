@@ -7,13 +7,13 @@
 -- MAGIC is then used to load the gold tables.
 -- MAGIC
 -- MAGIC Parameters in use:
--- MAGIC * catalog (default catadb360dev)
+-- MAGIC * catalog (default adbws_centralusadb3600121dev)
 -- MAGIC * dbname (default silverdb)
 
 -- COMMAND ----------
 
 -- MAGIC %python
--- MAGIC dbutils.widgets.text('catalog', 'catadb360dev')
+-- MAGIC dbutils.widgets.text('catalog', 'adbws_centralusadb3600121dev')
 -- MAGIC dbutils.widgets.text('dbname', 'silverdb')
 
 -- COMMAND ----------

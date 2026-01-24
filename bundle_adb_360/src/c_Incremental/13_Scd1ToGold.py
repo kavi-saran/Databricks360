@@ -6,7 +6,7 @@
 # MAGIC using the tablechanges from the change data feed and the watermark table
 # MAGIC
 # MAGIC Parameters:
-# MAGIC * catalog (default catadb360dev)
+# MAGIC * catalog (default adbws_centralusadb3600121dev)
 # MAGIC * schema (default schemadb360dev)
 # MAGIC * sourcedb(default silverdb)
 # MAGIC * destdb(default golddb)
@@ -14,7 +14,7 @@
 
 # COMMAND ----------
 
-dbutils.widgets.text('catalog', 'catadb360dev')
+dbutils.widgets.text('catalog', 'adbws_centralusadb3600121dev')
 dbutils.widgets.text('schema', 'schemaadb360dev')
 dbutils.widgets.text('volume', 'bronze')
 dbutils.widgets.text('destdb', 'silverdb')

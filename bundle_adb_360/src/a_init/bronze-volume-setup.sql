@@ -2,7 +2,7 @@
 -- MAGIC %md
 -- MAGIC # Verifying Catalog/Schema and Creating Volume on Bronze
 -- MAGIC ---
--- MAGIC * Catalog 'catadb360dev' with schema 'schemaadb360dev' should already have been created by cicd pipeline
+-- MAGIC * Catalog 'adbws_centralusadb3600121dev' with schema 'schemaadb360dev' should already have been created by cicd pipeline
 -- MAGIC * also the external storage location 'bronzeextlocdev' with the asscociated storage credentials
 -- MAGIC
 -- MAGIC finally this notebook is creating a volume for bronze files
@@ -26,7 +26,7 @@ show catalogs
 
 -- COMMAND ----------
 
-use catalog catadb360dev
+use catalog adbws_centralusadb3600121dev
 
 -- COMMAND ----------
 
@@ -34,7 +34,7 @@ show schemas
 
 -- COMMAND ----------
 
-create schema if not exists catadb360dev.schemaadb360dev 
+create schema if not exists adbws_centralusadb3600121dev.schemaadb360dev 
 
 -- COMMAND ----------
 

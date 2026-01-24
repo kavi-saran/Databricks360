@@ -4,13 +4,13 @@
 -- MAGIC ---
 -- MAGIC This notebook deletes the silverdb.
 -- MAGIC it needs two parameters:
--- MAGIC * the catalog (default catadb360dev)
+-- MAGIC * the catalog (default adbws_centralusadb3600121dev)
 -- MAGIC * the databasename (default silverdb)
 
 -- COMMAND ----------
 
 -- MAGIC %python
--- MAGIC dbutils.widgets.text('catalog', 'catadb360dev')
+-- MAGIC dbutils.widgets.text('catalog', 'adbws_centralusadb3600121dev')
 -- MAGIC dbutils.widgets.text('dbname', 'silverdb')
 
 -- COMMAND ----------

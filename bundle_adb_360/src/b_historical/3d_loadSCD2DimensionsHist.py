@@ -6,14 +6,14 @@
 # MAGIC it's going to be an scd type 2 dimension
 # MAGIC
 # MAGIC Parameters:
-# MAGIC * catalog (default catadb360dev)
+# MAGIC * catalog (default adbws_centralusadb3600121dev)
 # MAGIC * sourcedbname (default silverdb)
 # MAGIC * destdbname (default golddb)
 # MAGIC * tablename (default customers)
 
 # COMMAND ----------
 
-dbutils.widgets.text('catalog', 'catadb360dev')
+dbutils.widgets.text('catalog', 'adbws_centralusadb3600121dev')
 dbutils.widgets.text('sourcedbname', 'silverdb')
 dbutils.widgets.text('destdbname', 'golddb')
 dbutils.widgets.text('tablename', 'customers')

@@ -7,14 +7,14 @@
 # MAGIC (Optionally this would be the place to apply some data quality rules.)
 # MAGIC
 # MAGIC The parameters are as follows:
-# MAGIC * catalog (default catadb360dev)
+# MAGIC * catalog (default adbws_centralusadb3600121dev)
 # MAGIC * sourceschema (default schemaadb360dev)
 # MAGIC * volume (default bronze)
 # MAGIC * listoftables (default customers, restaurants, addresses, menuesconsumed)
 
 # COMMAND ----------
 
-dbutils.widgets.text('catalog', 'catadb360dev')
+dbutils.widgets.text('catalog', 'adbws_centralusadb3600121dev')
 dbutils.widgets.text('sourceschema', 'schemaadb360dev')
 dbutils.widgets.text('destschema', 'silverdb')
 dbutils.widgets.text('volume', 'bronze')
