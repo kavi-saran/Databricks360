@@ -9,8 +9,7 @@ trigger:
       - '*'
 
 variables:
-  - group: vgdevadb360
-
+- group: vgdevadb360
 
 stages:
 - stage: s_assignmetastore
@@ -21,11 +20,13 @@ stages:
     pool:
       vmImage: 'ubuntu-latest'
     steps:
+    - checkout: self
+
     - task: CmdLine@2
+      displayName: 'Install Databricks CLI v2'
       inputs:
         script: |
           curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sh
-      displayName: 'Install Databricks CLI v 2'
 
     - task: AzureCLI@2
       displayName: 'Call script assign workspace to metastore'
@@ -36,19 +37,48 @@ stages:
         scriptPath: './iac-adb-360/helpers/attach-workspace-to-metastore.sh'
         arguments: '$(resourceGroupName) $(tenantId) $(clientId) $(clientSecret) $(metastorename)'
 
+- stage: s_external_locations
+  displayName: 'create storage credential + external locations'
+  dependsOn: s_assignmetastore
+  jobs:
+  - job: j_external_locations
+    displayName: 'job create storage credential + external locations'
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - checkout: self
+
+    - task: CmdLine@2
+      displayName: 'Install Databricks CLI v2'
+      inputs:
+        script: |
+          curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sh
+
+    - task: AzureCLI@2
+      displayName: 'Create devcreds + bronze external location'
+      inputs:
+        azureSubscription: 'adb-sc'
+        scriptType: 'bash'
+        scriptLocation: 'scriptPath'
+        scriptPath: './iac-adb-360/helpers/create-ms-externallocation.sh'
+        arguments: '$(resourceGroupName) $(tenantId) $(clientId) $(clientSecret) $(metastorename) $(env) $(bronzestorageaccountname) $(credname) $(accessconnectorid)'
+
 - stage: s_assignrepo
   displayName: 'assign repository to spn'
+  dependsOn: s_assignmetastore
   jobs:
   - job: j_assignrepo
     displayName: 'Job assign repository to spn'
     pool:
       vmImage: 'ubuntu-latest'
     steps:
+    - checkout: self
+
     - task: CmdLine@2
+      displayName: 'Install Databricks CLI v2'
       inputs:
         script: |
           curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sh
-      displayName: 'Install Databricks CLI v 2'
 
     - task: AzureCLI@2
       displayName: 'Call script to assign workspace to repo'
@@ -58,7 +88,6 @@ stages:
         scriptLocation: 'scriptPath'
         scriptPath: './iac-adb-360/helpers/attach-to-repo-github.sh'
         arguments: '$(resourceGroupName) $(tenantId) $(clientId) $(clientSecret) $(repourl) $(ghuser) $(ghpat)'
-
 
 # - stage: s_createcluster
 #   displayName: 'create the cluster'
